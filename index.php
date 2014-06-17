@@ -12,7 +12,13 @@
 
 	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div><div class="calendar xxsmall"></div></div>
 	
-	<div class="top right"><div class="windsun small dimmed" data-bind="html: icons"></div><div class="temp" data-bind="html: temps"></div></div>
+	<div class="top right">
+		<div class="windsun small dimmed" data-bind="html: icons">
+		</div>
+		<div class="temp">
+			<span data-bind="css: iconClass, text: temp" class="icon dimmed wi">
+		</div>
+	</div>
 
 	<div class="bottom left small light">
 	<p id="0">.</p>
@@ -46,10 +52,24 @@ $(document).ready(function () {
 function AppViewModel() {
     self = this;
 	
-	this.icons = ko.observable("");
-	this.temps  = ko.observable("");
+	this.icons = ko.observable('');
+	
+	this.iconClass = ko.computed(function(data)
+	{
+		return iconTable[self.weatherData.weather[0].icon];
+	});
+	
+	//this.temps  = ko.observable("");
+	this.temps = ko.computed(function(data)
+		{
+			return self.weatherData.main.temp;
+		});
+		
+	
 	this.times  = ko.observable("");
 	this.date = ko.observable("");
+	
+	this.weatherData = ko.observable();
 	
 	this.updateClock = function(){
 	
@@ -94,7 +114,8 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-		$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(json, textStatus) {
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, weatherData)
+	/*	$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(json, textStatus) {
 
 			var temp = Math.round(json.main.temp);
 			var temp_min = json.main.temp_min;
@@ -119,7 +140,7 @@ function AppViewModel() {
 				sunString = '<span class="wi wi-sunset xdimmed"></span> ' + sunset;
 			}
 			self.icons(windString + ' ' + sunString);
-		});
+		});*/
 
 	};
 	this.updateCurrentWeather();
