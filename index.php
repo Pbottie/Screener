@@ -6,17 +6,22 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
 <script src="js/moment.min.js"></script>
+<script src="js/knockout.mapping.js"></script>
 </head>
 <body>
 
-
-	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div><div class="calendar xxsmall"></div></div>
+	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div></div>
 	
 	<div class="top right">
-		<div class="windsun small dimmed" data-bind="html: icons">
+		<div class="small dimmed">
+		<span class="wi wi-strong-wind xdimmed"></span>
+		<span data-bind="text: windSpeed"></span>
+		<span data-bind="css: suns"></span>
+		<span data-bind="text: sunTime"></span>
 		</div>
-		<div class="temp">
-			<span data-bind="css: iconClass, text: temp" class="icon dimmed wi">
+		<div>
+			<span data-bind="css: iconClass" class="icon dimmed wi"></span>
+			<span class="temp" data-bind="html: temps">
 		</div>
 	</div>
 
@@ -52,24 +57,69 @@ $(document).ready(function () {
 function AppViewModel() {
     self = this;
 	
-	this.icons = ko.observable('');
-	
-	this.iconClass = ko.computed(function(data)
-	{
-		return iconTable[self.weatherData.weather[0].icon];
-	});
-	
-	//this.temps  = ko.observable("");
-	this.temps = ko.computed(function(data)
-		{
-			return self.weatherData.main.temp;
-		});
-		
 	
 	this.times  = ko.observable("");
 	this.date = ko.observable("");
+	this.weatherData = ko.observable(null);
+				
+	this.sunTime = ko.observable(); 
 	
-	this.weatherData = ko.observable();
+	
+	this.windSpeed = ko.computed(function()
+	{		
+		if(self.weatherData() == null){
+		return 'N/a';
+		}
+		else{
+		return Math.round(self.weatherData().wind.speed);
+		}
+	});
+
+	this.iconClass = ko.computed(function()
+	{		
+		if(self.weatherData() == null){
+		return "wi-day-sunny";
+		}
+		else{
+		return iconTable[self.weatherData().weather[0].icon];
+		}
+	});
+	
+	this.temps = ko.computed(function()
+		{
+			if(self.weatherData() == null){
+				return 0 + '&deg;';
+			}else{
+				return Math.round(self.weatherData().main.temp*10)/10 +'&deg;';
+			}
+		});
+	
+	this.suns = ko.computed(function()
+	{
+		var now = new Date();
+		
+		if(self.weatherData() == null){
+		return "wi-day-sunny";
+		}
+		else{
+			if (self.weatherData().sys.sunrise*1000 < now && self.weatherData().sys.sunset*1000 > now) {
+				self.sunTime(new Date(self.weatherData().sys.sunset*1000).toTimeString().substring(0,5));
+				return "wi wi-sunset xdimmed";
+
+			}
+			else{
+				self.sunTime(new Date(self.weatherData().sys.sunrise*1000).toTimeString().substring(0,5));
+				console.log(self.sunTime);
+				return "wi wi-sunrise xdimmed";
+
+			}
+		}		
+	});
+	
+	("wi wi-sunset xdimmed");	
+	
+ 
+	
 	
 	this.updateClock = function(){
 	
@@ -77,7 +127,6 @@ function AppViewModel() {
 	var dates = now.format('LLLL').split(' ',4);
 	
 	self.date(dates[0] + ' ' + dates[1] + ' ' + dates[2] + ' ' + dates[3]);
-	
 	var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
 	self.times(times);
 	
@@ -114,35 +163,12 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-	$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, weatherData)
-	/*	$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(json, textStatus) {
-
-			var temp = Math.round(json.main.temp);
-			var temp_min = json.main.temp_min;
-			var temp_max = json.main.temp_max;
-			var wind = Math.round(json.wind.speed);
-
-			var iconClass = iconTable[json.weather[0].icon];
-			
-			var iconText = '<span class=" icon dimmed wi ' + iconClass + '"></span>'
-				
-			//$('.temp').updateWithText(icon.outerHTML()+temp+'&deg;', 1000);
-			
-			self.temps( iconText + temp + '&deg;');
-
-			var now = new Date();
-			var sunrise = new Date(json.sys.sunrise*1000).toTimeString().substring(0,5);
-			var sunset = new Date(json.sys.sunset*1000).toTimeString().substring(0,5);
-			
-			var windString = '<span class="wi wi-strong-wind xdimmed"></span> ' + wind ;
-			var sunString = '<span class="wi wi-sunrise xdimmed"></span> ' + sunrise;
-			if (json.sys.sunrise*1000 < now && json.sys.sunset*1000 > now) {
-				sunString = '<span class="wi wi-sunset xdimmed"></span> ' + sunset;
-			}
-			self.icons(windString + ' ' + sunString);
-		});*/
+		$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
+			self.weatherData(data);
+		});
 
 	};
+
 	this.updateCurrentWeather();
 	setInterval(this.updateCurrentWeather, 60000);
 	//END of Weather
