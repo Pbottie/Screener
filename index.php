@@ -30,32 +30,12 @@
 		</div>
 	</div>
 
-	<div class="bottom left small light">
-	<p id="0">.</p>
-	<p id="1">.</p>
-	<p id="2">.</p>
-	<p id="3">.</p>
+	<div class="bottom left small" data-bind="foreach: buses">
+	<p data-bind="text: $data.timeTable">.</p>
 	</div>
 
 
 <script>
-$(document).ready(function () {
-
-    var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
-    $.getJSON( tripQuestion,function(result) {
-        var bus =[];
-        var time=[];
-		
-        $.each(result.DepartureBoard.Departure, function(i, data) {
-            bus.push(data.name);
-            time.push(data.rtTime);
-            //Now Add Bus and Times to page and/or time left
-            var textField = "#" + i.toString();
-            $(textField).text(bus[i] + " " + time[i]);
-        });
-    });
-
-});
 
 function AppViewModel() {
     self = this;
@@ -64,6 +44,27 @@ function AppViewModel() {
 	this.date = ko.observable("");
 	this.weatherData = ko.observable(null);	
 	this.sunTime = ko.observable(); 
+	
+	self.buses = ko.observableArray();	
+
+	
+	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
+	this.updateBus = function()
+	{
+	$.getJSON( tripQuestion,function(result) {
+   	
+
+		self.buses.removeAll();
+        $.each(result.DepartureBoard.Departure, function(i, data) {
+
+            self.buses.push({timeTable: data.name + " " + data.rtTime});
+		
+        });
+    });
+	
+	};
+	
+	setInterval(this.updateBus, 10000);
 	
 	this.windSpeed = ko.computed(function()
 	{		
