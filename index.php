@@ -110,15 +110,12 @@ function AppViewModel() {
 			}
 			else{
 				self.sunTime(new Date(self.weatherData().sys.sunrise*1000).toTimeString().substring(0,5));
-				console.log(self.sunTime);
 				return "wi wi-sunrise xdimmed";
 
 			}
 		}		
 	});
-	
-	("wi wi-sunset xdimmed");	
-	
+		
  	
 	this.updateClock = function(){
 	
