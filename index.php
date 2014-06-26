@@ -34,7 +34,6 @@
 	<p data-bind="text: $data.timeTable">.</p>
 	</div>
 
-
 <script>
 
 function AppViewModel() {
@@ -46,13 +45,11 @@ function AppViewModel() {
 	this.sunTime = ko.observable(); 
 	
 	self.buses = ko.observableArray();	
-
 	
 	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
 	this.updateBus = function()
 	{
 	$.getJSON( tripQuestion,function(result) {
-   	
 
 		self.buses.removeAll();
         $.each(result.DepartureBoard.Departure, function(i, data) {
@@ -64,7 +61,7 @@ function AppViewModel() {
 	
 	};
 	
-	setInterval(this.updateBus, 10000);
+	setInterval(this.updateBus, 20000);
 	
 	this.windSpeed = ko.computed(function()
 	{		
@@ -115,7 +112,6 @@ function AppViewModel() {
 			}
 		}		
 	});
-		
  	
 	this.updateClock = function(){
 	
