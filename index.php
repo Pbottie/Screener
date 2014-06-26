@@ -1,12 +1,17 @@
 <html>
 <head>
 <title>Magic Mirror</title>
+
 <link rel="stylesheet" href="css/main.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/weather-icons.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
 <script src="js/moment.min.js"></script>
-<script src="js/knockout.mapping.js"></script>
+
+<script type="text/javascript">
+	var gitHash = '<?php echo trim(`git rev-parse HEAD`) ?>';
+</script>
+
 </head>
 <body>
 
@@ -36,9 +41,6 @@
 <script>
 $(document).ready(function () {
 
-    /*	For trip call (from/to)
-    	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/trip?originId=.kvil&destId=.anekd&format=json&jsonpCallback=tripSearch&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0';
-    */
     var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
     $.getJSON( tripQuestion,function(result) {
         var bus =[];
@@ -54,16 +56,14 @@ $(document).ready(function () {
     });
 
 });
+
 function AppViewModel() {
     self = this;
 	
-	
 	this.times  = ko.observable("");
 	this.date = ko.observable("");
-	this.weatherData = ko.observable(null);
-				
+	this.weatherData = ko.observable(null);	
 	this.sunTime = ko.observable(); 
-	
 	
 	this.windSpeed = ko.computed(function()
 	{		
@@ -118,9 +118,7 @@ function AppViewModel() {
 	
 	("wi wi-sunset xdimmed");	
 	
- 
-	
-	
+ 	
 	this.updateClock = function(){
 	
 	var now = moment();
@@ -172,8 +170,22 @@ function AppViewModel() {
 	this.updateCurrentWeather();
 	setInterval(this.updateCurrentWeather, 60000);
 	//END of Weather
-
-
+	
+	//SELFUPDATER
+	this.checkVersion = function()
+	{
+		$.getJSON('githash.php', {}, function(json, textStatus) {
+			if (json) {
+				if (json.gitHash != gitHash) {
+					window.location.reload();
+					window.location.href=window.location.href;
+				}
+			}
+		});
+		
+	};
+	setInterval(this.checkVersion, 5000);
+	
 }
 ko.applyBindings(new AppViewModel());
 </script>
