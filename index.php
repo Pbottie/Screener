@@ -33,7 +33,9 @@
 	<div class="bottom left small" data-bind="foreach: buses">
 	<p data-bind="text: $data.timeTable">.</p>
 	</div>
-
+	<div class="bottom right small" data-bind="text: SSID">
+	N/a
+	</div>
 <script>
 
 function AppViewModel() {
@@ -45,6 +47,16 @@ function AppViewModel() {
 	this.sunTime = ko.observable(); 
 	
 	self.buses = ko.observableArray();	
+	
+	this.SSID = ko.observable("N/A");	
+	this.ssidUpdate = function()
+	{
+
+		$.get("SSID", function(data){
+			self.SSID(data.toUpperCase());
+		});
+	}
+	setInterval(this.ssidUpdate, 60000);
 	
 	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
 	this.updateBus = function()
