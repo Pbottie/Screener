@@ -71,7 +71,6 @@ function AppViewModel() {
 		{
 			break;
 		}
-		}
 	        self.buses.push({timeTable: data.name + " " + data.rtTime});
 	
         });
