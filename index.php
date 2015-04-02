@@ -69,7 +69,7 @@ function AppViewModel() {
         $.each(result.DepartureBoard.Departure, function(i, data) {
 		if(i=4)
 		{
-			break;
+			return false;
 		}
 	        self.buses.push({timeTable: data.name + " " + data.rtTime});
 	
