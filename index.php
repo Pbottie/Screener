@@ -67,9 +67,13 @@ function AppViewModel() {
 
 		self.buses.removeAll();
         $.each(result.DepartureBoard.Departure, function(i, data) {
-
-            self.buses.push({timeTable: data.name + " " + data.rtTime});
-		
+		if(i=4)
+		{
+			break;
+		}
+		}
+	        self.buses.push({timeTable: data.name + " " + data.rtTime});
+	
         });
     });
 	
