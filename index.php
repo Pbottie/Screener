@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="bottom left small" data-bind="foreach: buses">
-	<p data-bind="text: $data.timeTable">.</p>
+	<p data-bind="html: $data.timeTable">.</p>
 	</div>
 	<div class="bottom right small" data-bind="text: SSID">
 	N/a
@@ -68,11 +68,11 @@ function AppViewModel() {
 		self.buses.removeAll();
         $.each(result.DepartureBoard.Departure, function(i, data) {
 	
-		if(i==4)
+		if(i==6)
 		{
 			return false;
 		}
-	        self.buses.push({timeTable: data.name + " " + data.rtTime});
+	        self.buses.push({timeTable:  '<span style="background-color:' + data.fgColor + '">' + '<font color="black">' + data.name + " " + data.rtTime + "</font>"});
 	
         });
     });
