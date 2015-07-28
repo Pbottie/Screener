@@ -73,7 +73,7 @@ function AppViewModel() {
 			return false;
 		}
 		//If black fgColor
-		if(data.fgColor == #000000){
+		if(data.fgColor == "#000000"){
 			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="white">' 
 			+ data.name + " " 
