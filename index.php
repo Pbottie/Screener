@@ -72,12 +72,24 @@ function AppViewModel() {
 		{
 			return false;
 		}
-	        self.buses.push({timeTable:  '<span style="background-color:' 
-	        + data.fgColor + '">' + '<font color="black">' 
-	        + data.name + " " 
-	        + data.rtTime + " "
-	        + data.direction
-	        + "</font>"});
+		//If black fgColor
+		if(data.fgColor == #000000){
+			self.buses.push({timeTable:  '<span style="background-color:' 
+	        	+ data.fgColor + '">' + '<font color="white">' 
+			+ data.name + " " 
+			+ data.rtTime + " "
+	        	+ data.direction
+	        	+ "</font>"});	
+		}
+		else{
+		        self.buses.push({timeTable:  '<span style="background-color:' 
+		        + data.fgColor + '">' + '<font color="black">' 
+		        + data.name + " " 
+		        + data.rtTime + " "
+		        + data.direction
+		        + "</font>"});
+			
+		}
 	
         });
     });
