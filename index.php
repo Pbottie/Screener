@@ -71,7 +71,7 @@ function AppViewModel() {
 		self.buses.removeAll();
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
-		if(i==6)
+		if(i==8)
 		{
 			return false;
 		}
