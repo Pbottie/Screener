@@ -94,7 +94,7 @@ function AppViewModel() {
 			
 		}
 			
-        }
+        });
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
 
@@ -116,7 +116,7 @@ function AppViewModel() {
 			
 		}
 			
-        });
+        }
 		      
 		      );
 	
