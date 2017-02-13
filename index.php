@@ -64,12 +64,12 @@ function AppViewModel() {
 
 	this.updateBus = function()
 	{
-		self.buses.removeAll();
+		
 	//Olivedal
 	$.getJSON( tripQuestion,function(result) {
 
 		
-		//self.buses.removeAll();
+		self.buses.removeAll();
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
 		if(i==6)
