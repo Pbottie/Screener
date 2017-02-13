@@ -98,9 +98,9 @@ function AppViewModel() {
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
 
-       		$.each(result.DepartureBoard.Departure, function(i, data) {
+       		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		if(i==6)
+		if(j==6)
 		{
 			return false;
 		}
