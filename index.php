@@ -112,7 +112,7 @@ function AppViewModel() {
 			+ data.rtTime + " "
 	        	+ data.direction
 	        	+ "</font>"});	
-		});
+		};
 			
 		}
 			
