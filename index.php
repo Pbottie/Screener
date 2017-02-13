@@ -74,7 +74,7 @@ function AppViewModel() {
 	
 		if(i==6)
 		{
-			continue; //return false;
+			return true;
 		}
 		//If black fgColor
 		if(data.fgColor == "#000000"){
