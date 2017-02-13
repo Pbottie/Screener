@@ -64,14 +64,15 @@ function AppViewModel() {
 
 	this.updateBus = function()
 	{
+		self.buses.removeAll();
 	//Olivedal
 	$.getJSON( tripQuestion,function(result) {
 
 		
-		self.buses.removeAll();
+		//self.buses.removeAll();
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
-		if(i==8)
+		if(i==6)
 		{
 			return false;
 		}
@@ -104,7 +105,6 @@ function AppViewModel() {
 		{
 			return false;
 		}
-		//If black fgColor
 		if(data.sname == "761"){
 			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
