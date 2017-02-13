@@ -74,7 +74,7 @@ function AppViewModel() {
 	
 		if(i==6)
 		{
-			return false;
+			break; //return false;
 		}
 		//If black fgColor
 		if(data.fgColor == "#000000"){
@@ -101,7 +101,7 @@ function AppViewModel() {
 
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		if(j==6)
+		if(j==2)
 		{
 			return false;
 		}
