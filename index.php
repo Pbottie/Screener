@@ -59,12 +59,15 @@ function AppViewModel() {
 	setInterval(this.ssidUpdate, 60000);
 	
 	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.olive&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
-//	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4'; AND direction=9021014001760000&
+	var tripQuestionLinne = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.olive&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4;
+	//= 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4'; AND direction=9021014001760000&
 
 	this.updateBus = function()
 	{
+	//Olivedal
 	$.getJSON( tripQuestion,function(result) {
 
+		
 		self.buses.removeAll();
         $.each(result.DepartureBoard.Departure, function(i, data) {
 	
@@ -90,7 +93,26 @@ function AppViewModel() {
 		        + "</font>"});
 			
 		}
+	//Linne 761
+	$.getJSON( tripQuestionLinne,function(result) {
+
+		
+	$.each(result.DepartureBoard.Departure, function(i, data) {
 	
+		if(i==6)
+		{
+			return false;
+		}
+		//If black fgColor
+		if(data.sname == "761"){
+			self.buses.push({timeTable:  '<span style="background-color:' 
+	        	+ data.fgColor + '">' + '<font color="white">' 
+			+ data.name + " " 
+			+ data.rtTime + " "
+	        	+ data.direction
+	        	+ "</font>"});	
+		}
+		
         });
     });
 	
