@@ -69,7 +69,7 @@ function AppViewModel() {
 
 		
 		self.buses.removeAll();
-        $.each(result.DepartureBoard.Departure, function(i, data) {
+       		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
 		if(i==6)
 		{
@@ -93,27 +93,9 @@ function AppViewModel() {
 		        + "</font>"});
 			
 		}
-	//Linne 761
-	$.getJSON( tripQuestionLinne,function(result) {
-
-		
-	$.each(result.DepartureBoard.Departure, function(i, data) {
-	
-		if(i==6)
-		{
-			return false;
-		}
-		//If black fgColor
-		if(data.sname == "761"){
-			self.buses.push({timeTable:  '<span style="background-color:' 
-	        	+ data.fgColor + '">' + '<font color="white">' 
-			+ data.name + " " 
-			+ data.rtTime + " "
-	        	+ data.direction
-	        	+ "</font>"});	
-		}
-		
+			
         });
+	
     });
 	
 	};
