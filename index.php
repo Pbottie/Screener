@@ -125,8 +125,7 @@ function AppViewModel() {
 			self.bus761.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
-			+ data.rtTime + " "
-	        	+ data.direction
+			+ data.rtTime
 	        	+ "</font>"});	
 		};
 			
