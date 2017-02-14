@@ -113,18 +113,18 @@ function AppViewModel() {
 
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		if(j==2)
+		if(j==3)
 		{
 			return false;
 		}
-		if(data.sname == "761"){
+		//if(data.sname == "761"){
 			self.bus761.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
 			+ data.rtTime + " "
 	        	+ data.direction
 	        	+ "</font>"});	
-		};
+		//};
 			
 		});
 			
