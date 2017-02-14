@@ -109,7 +109,7 @@ function AppViewModel() {
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
 		var buss = 0;
-		if(data.sname == "761" && buss !== 3){
+		if(data.sname == "761" && buss != 3){
 			buss = buss + 1;
 			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
