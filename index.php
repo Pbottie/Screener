@@ -99,26 +99,21 @@ function AppViewModel() {
 			
 		}
 			
-        });
+		});
 	
 	
-    });
-	
-	};
-	
-	this.update761 = function()
-	{
+  	 });// END Olivedal
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
 
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		if(j==3)
-		{
-			return false;
-		}
-		//if(data.sname == "761"){
-			self.bus761.push({timeTable:  '<span style="background-color:' 
+		//if(j==3)
+		//{
+		//	return false;
+		//}
+		if(data.sname == "761"){
+			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
 			+ data.rtTime + " "
@@ -128,12 +123,17 @@ function AppViewModel() {
 			
 		});
 			
-        }
+        	}
 		      
 		      );//End Linne
+	};
+	
+	this.update761 = function()
+	{
+	
 		
 		
-		};
+	};
 	
 	
 	
@@ -143,7 +143,9 @@ function AppViewModel() {
 	
 	
 	setInterval(this.updateBus, 20000);
+	
 	setInterval(this.update761, 20000);
+	
 	this.windSpeed = ko.computed(function()
 	{		
 		if(self.weatherData() == null){
