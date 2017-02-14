@@ -114,7 +114,7 @@ function AppViewModel() {
 	$.getJSON( tripQuestionLinne,function(result) {
 		
 		var buss = 0;
-		
+		self.bus761.removeAll();
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
 		
