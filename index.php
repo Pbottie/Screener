@@ -33,6 +33,9 @@
 	<div class="bottom left small" data-bind="foreach: buses">
 	<p data-bind="html: $data.timeTable">.</p>
 	</div>
+	<div class="bottom center-hor small" data-bind="foreach: bus761">
+	<p data-bind="html: $data.timeTable">.</p>
+	</div>
 	<div class="bottom right small" data-bind="text: SSID">
 	N/a
 	</div>
@@ -47,6 +50,7 @@ function AppViewModel() {
 	this.sunTime = ko.observable(); 
 	
 	self.buses = ko.observableArray();	
+	self.bus761 =ko.observableArray();
 	
 	this.SSID = ko.observable("N/A");	
 	this.ssidUpdate = function()
@@ -106,7 +110,7 @@ function AppViewModel() {
 			return false;
 		}
 		if(data.sname == "761"){
-			self.buses.push({timeTable:  '<span style="background-color:' 
+			self.bus761.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
 			+ data.rtTime + " "
