@@ -108,10 +108,7 @@ function AppViewModel() {
 
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		//if(j==3)
-		//{
-		//	return false;
-		//}
+		
 		if(data.sname == "761"){
 			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
@@ -119,7 +116,7 @@ function AppViewModel() {
 			+ data.rtTime + " "
 	        	+ data.direction
 	        	+ "</font>"});	
-		//};
+		};
 			
 		});
 			
