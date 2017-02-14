@@ -110,7 +110,7 @@ function AppViewModel() {
 	
 		var buss = 0;
 		if(data.sname == "761" && buss < 3){
-			buss = buss + 1;
+			buss += 1;
 			console.log(buss);
 			
 			self.buses.push({timeTable:  '<span style="background-color:' 
