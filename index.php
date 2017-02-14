@@ -100,6 +100,14 @@ function AppViewModel() {
 		}
 			
         });
+	
+	
+    });
+	
+	};
+	
+	this.update761 = function()
+	{
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
 
@@ -122,14 +130,20 @@ function AppViewModel() {
 			
         }
 		      
-		      );
+		      );//End Linne
+		
+		
+		};
 	
-    });
 	
-	};
+	
+	
+	
+	
+	
 	
 	setInterval(this.updateBus, 20000);
-	
+	setInterval(this.update761, 20000);
 	this.windSpeed = ko.computed(function()
 	{		
 		if(self.weatherData() == null){
