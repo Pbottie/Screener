@@ -104,6 +104,12 @@ function AppViewModel() {
 	
   	 });// END Olivedal
 		
+	
+	};
+	
+	this.update761 = function()
+	{
+	
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
 		
@@ -116,7 +122,7 @@ function AppViewModel() {
 			buss += 1;
 			console.log(buss);
 			
-			self.buses.push({timeTable:  '<span style="background-color:' 
+			self.bus761.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
 			+ data.rtTime + " "
@@ -128,13 +134,7 @@ function AppViewModel() {
 			
         	}
 		      
-		      );//End Linne
-	};
-	
-	this.update761 = function()
-	{
-	
-		
+		      );//End Linne	
 		
 	};
 	
