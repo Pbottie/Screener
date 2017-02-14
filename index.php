@@ -103,12 +103,15 @@ function AppViewModel() {
 	
 	
   	 });// END Olivedal
+		
 	//Linne 761
 	$.getJSON( tripQuestionLinne,function(result) {
-
+		
+		var buss = 0;
+		
        		$.each(result.DepartureBoard.Departure, function(j, data) {
 	
-		var buss = 0;
+		
 		if(data.sname == "761" && buss < 3){
 			buss += 1;
 			console.log(buss);
