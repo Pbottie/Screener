@@ -74,6 +74,8 @@ function AppViewModel() {
 	var minutes = today.getMinutes();
 	
 	console.log(year + "-" + month + "-" + day);
+	console.log(hours + ":" + minutes);
+	
 	
 	
 	
