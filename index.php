@@ -67,7 +67,7 @@ function AppViewModel() {
 	var token;
 	
 	var today = new Date();
-	var year = today.getFullYear;
+	var year = today.getFullYear();
 	var month = today.getMonth()+1;
 	var day = today.getDate();
 	var hours = today.getHours();
