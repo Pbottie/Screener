@@ -62,6 +62,25 @@ function AppViewModel() {
 	}
 	setInterval(this.ssidUpdate, 60000);
 	
+	//OAuth Token Begin
+	
+	var token;
+	
+	var today = new Date();
+	var year = today.getFullYear;
+	var month = today.getMonth()+1;
+	var day = today.getDate();
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+	
+	console.log(year+ "-" + month + "-" + day +);
+	
+	
+	
+	
+	//OAuth Token End
+	
+	
 	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.olive&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
 	var tripQuestionLinne = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.linne&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
 	//= 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4'; AND direction=9021014001760000&
