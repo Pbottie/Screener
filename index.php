@@ -71,7 +71,7 @@ function AppViewModel() {
 		
 	$.getJSON("key.php" ,function(result) {
 
-		this.token = result.access_token;
+		token = result.access_token;
 		
 		});
 	};
