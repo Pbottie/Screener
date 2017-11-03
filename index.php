@@ -177,7 +177,8 @@ function AppViewModel() {
 		var buss = 0;
 		self.bus761.removeAll();
        		$.each(result.TripList.Trip, function(j, data) {
-	
+		console.log(data.Leg);
+		console.log(data.Leg.sname);
 		
 		if(data.Leg.sname == "761" && buss < 3){
 			buss += 1;
