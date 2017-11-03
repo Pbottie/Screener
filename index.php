@@ -183,8 +183,6 @@ function AppViewModel() {
 		if(data.Leg.sname == "761" && buss < 3){
 			buss += 1;
 			var busTime;
-			console.log(data.Leg.Origin.rtTime);
-			console.log(data.Leg.Origin.time);
 			
 			if(data.Leg.Origin.rtTime != null){
 				busTime= data.Leg.Origin.rtTime;
@@ -193,8 +191,8 @@ function AppViewModel() {
 			}
 			
 			self.bus761.push({timeTable:  '<span style="background-color:' 
-	        	+ data.fgColor + '">' + '<font color="black">' 
-			+ data.name + " " 
+	        	+ data.Leg.fgColor + '">' + '<font color="black">' 
+			+ data.Leg.name + " " 
 			+ busTime
 	        	+ "</font>"});	
 		};
