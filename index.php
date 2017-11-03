@@ -136,7 +136,7 @@ function AppViewModel() {
 		        self.buses.push({timeTable:  '<span style="background-color:' 
 		        + data.fgColor + '">' + '<font color="black">' 
 		        + data.name + " " 
-		        + data.rtTime + " "
+		        + tramTime + " "
 		        + data.direction
 		        + "</font>"});
 			
