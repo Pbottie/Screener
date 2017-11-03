@@ -79,16 +79,16 @@ function AppViewModel() {
 	this.updateToken = function()
 	{
 		
-	//Olivedal
+	
 	$.getJSON("http://localhost/Screener/key.php" ,function(result) {
 
-		console.log(result.access_token);
+	console.log(result.access_token);
 	this.token = result.access_token;
-			
-		});
+	
+	});
 	
 	
-  	 });// END Olivedal
+  	 
 	
 	
 	setInterval(this.updateToken, 1800000);
