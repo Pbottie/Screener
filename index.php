@@ -113,6 +113,7 @@ function AppViewModel() {
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
 		var tramTime;
+		console.log(data.rtTime);
 		if(data.rtTime != null){
 			tramTime= data.rtTime;
 		}else{
@@ -183,7 +184,7 @@ function AppViewModel() {
 		if(data.sname == "761" && buss < 3){
 			buss += 1;
 			var busTime;
-			console.log(data.rtTime);
+			
 			if(data.rtTime != null){
 				busTime= data.rtTime;
 			}else{
