@@ -94,7 +94,7 @@ function AppViewModel() {
 	var idag = year + "-" + month + "-" + day;
 	var tid = hours + ":" + minutes;
 		
-	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid;
+	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid + '&format=json';
 	
 	//Olivedal
 	$.ajaxSetup({
@@ -156,7 +156,7 @@ function AppViewModel() {
 	var idag = year + "-" + month + "-" + day;
 	var tid = hours + ":" + minutes;
 		
-	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.linne&date=' + idag + '&time=' + tid;
+	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.linne&date=' + idag + '&time=' + tid + '&format=json';
 		
 	//Linne 761
 	$.ajaxSetup({
