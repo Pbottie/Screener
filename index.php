@@ -162,7 +162,7 @@ function AppViewModel() {
 	var idag = year + "-" + month + "-" + day;
 	var tid = hours + ":" + minutes;
 		
-	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.linne&date=' + idag + '&time=' + tid + '&format=json';
+	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.linne&destId=.solto&date=' + idag + '&time=' + tid + '&useTram=0&format=json';
 		
 	//Linne 761
 	$.ajaxSetup({
@@ -176,17 +176,17 @@ function AppViewModel() {
 		
 		var buss = 0;
 		self.bus761.removeAll();
-       		$.each(result.DepartureBoard.Departure, function(j, data) {
+       		$.each(result.TripList.Trip, function(j, data) {
 	
 		
-		if(data.sname == "761" && buss < 3){
+		if(data.Leg.sname == "761" && buss < 3){
 			buss += 1;
 			var busTime;
 			
-			if(data.rtTime != null){
-				busTime= data.rtTime;
+			if(data.Leg.Origin.rtTime != null){
+				busTime= data.Leg.Origin.rtTime;
 			}else{
-				busTime = data.time;
+				busTime = data.Leg.Origin.time;
 			}
 			
 			self.bus761.push({timeTable:  '<span style="background-color:' 
