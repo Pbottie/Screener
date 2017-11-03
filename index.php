@@ -108,10 +108,17 @@ function AppViewModel() {
 		
 	$.getJSON( tripQuestion,function(result) {
 
-		console.log(result);
+		
 		self.buses.removeAll();
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
+		var tramTime;
+		if(data.rTime != null){
+			tramTime= data.rtTime;
+		}else{
+			tramTime = data.time;
+		}
+			
 		if(i==8)
 		{
 			return false;
@@ -121,7 +128,7 @@ function AppViewModel() {
 			self.buses.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="white">' 
 			+ data.name + " " 
-			+ data.rtTime + " "
+			+ tramTime + " "
 	        	+ data.direction
 	        	+ "</font>"});	
 		}
@@ -167,6 +174,7 @@ function AppViewModel() {
 		
 	$.getJSON( tripQuestionLinne,function(result) {
 		
+		
 		var buss = 0;
 		self.bus761.removeAll();
        		$.each(result.DepartureBoard.Departure, function(j, data) {
@@ -174,12 +182,17 @@ function AppViewModel() {
 		
 		if(data.sname == "761" && buss < 3){
 			buss += 1;
-			console.log(buss);
+			var busTime;
+			if(data.rTime != null){
+				busTime= data.rtTime;
+			}else{
+				busTime = data.time;
+			}
 			
 			self.bus761.push({timeTable:  '<span style="background-color:' 
 	        	+ data.fgColor + '">' + '<font color="black">' 
 			+ data.name + " " 
-			+ data.rtTime
+			+ busTime
 	        	+ "</font>"});	
 		};
 			
