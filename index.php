@@ -111,10 +111,11 @@ function AppViewModel() {
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
 		var tramTime;
-		console.log(data.rtTime != null);
+		
 		if(data.rtTime != null){
 			tramTime= data.rtTime;
 		}else{
+			console.log(data.time);
 			tramTime = data.time;
 		}
 			
