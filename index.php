@@ -80,7 +80,7 @@ function AppViewModel() {
 	{
 		
 	
-	$.getJSON("http://localhost/Screener/key.php" ,function(result) {
+	$.getJSON("key.php" ,function(result) {
 
 	console.log(result);
 	console.log(result.access_token);
