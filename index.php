@@ -85,9 +85,9 @@ function AppViewModel() {
 	console.log(result.access_token);
 	this.token = result.access_token;
 	
-	});
+		});
 	
-	
+	};
   	 
 	
 	
