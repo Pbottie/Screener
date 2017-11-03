@@ -65,6 +65,24 @@ function AppViewModel() {
 	//OAuth Token Begin
 	
 	var token;
+		
+	this.updateToken = function()
+	{
+		
+	$.getJSON("key.php" ,function(result) {
+
+		this.token = result.access_token;
+		
+		});
+	};
+	setInterval(this.updateToken, 18000);
+		
+	//OAuth Token End
+	
+	
+	
+	this.updateBus = function()
+	{
 	
 	var today = new Date();
 	var year = today.getFullYear();
@@ -73,38 +91,21 @@ function AppViewModel() {
 	var hours = today.getHours();
 	var minutes = today.getMinutes();
 	
-	console.log(year + "-" + month + "-" + day);
-	console.log(hours + ":" + minutes);
+	var idag = year + "-" + month + "-" + day;
+	var tid = hours + ":" + minutes;
+		
+	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid;
 	
-	this.updateToken = function()
-	{
 		
 	
-	$.getJSON("key.php" ,function(result) {
-
-	console.log(result);
-	console.log(result.access_token);
-	this.token = result.access_token;
-	
-		});
-	
-	};
-  	 
-	
-	
-	setInterval(this.updateToken, 18000);
-		
-	//OAuth Token End
-	
-	
-	var tripQuestion = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.olive&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
-	var tripQuestionLinne = 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.linne&format=json&jsonpCallback=?&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4';
-	//= 'https://api.vasttrafik.se/bin/rest.exe/v1/departureBoard?id=.kvil&format=json&jsonpCallback=?&direction=.anekd&authKey=5914945f-3e58-4bbc-8169-29571809775d&needJourneyDetail=0&timeSpan=1439&maxDeparturesPerLine=4'; AND direction=9021014001760000&
-
-	this.updateBus = function()
-	{
-		
 	//Olivedal
+	$.ajaxSetup({
+		headers : {
+			'Authorization' : 'Bearer '+ token,
+		}
+	});		
+		
+		
 	$.getJSON( tripQuestion,function(result) {
 
 		
@@ -144,8 +145,26 @@ function AppViewModel() {
 	
 	this.update761 = function()
 	{
+		
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var day = today.getDate();
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
 	
+	var idag = year + "-" + month + "-" + day;
+	var tid = hours + ":" + minutes;
+		
+	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.linne&date=' + idag + '&time=' + tid;
+		
 	//Linne 761
+	$.ajaxSetup({
+		headers : {
+			'Authorization' : 'Bearer '+ token,
+		}
+	});
+		
 	$.getJSON( tripQuestionLinne,function(result) {
 		
 		var buss = 0;
