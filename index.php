@@ -98,8 +98,6 @@ function AppViewModel() {
 	
 	//Olivedal
 	$.ajaxSetup({
-		
-		
 		headers : {
 			'Authorization' : 'Bearer '+ token,
 		}
@@ -113,7 +111,7 @@ function AppViewModel() {
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
 		var tramTime;
-		console.log(data.rtTime);
+		console.log(data.rtTime != null);
 		if(data.rtTime != null){
 			tramTime= data.rtTime;
 		}else{
