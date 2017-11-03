@@ -82,6 +82,7 @@ function AppViewModel() {
 	
 	$.getJSON("http://localhost/Screener/key.php" ,function(result) {
 
+	console.log(result);
 	console.log(result.access_token);
 	this.token = result.access_token;
 	
@@ -91,7 +92,7 @@ function AppViewModel() {
   	 
 	
 	
-	setInterval(this.updateToken, 1800000);
+	setInterval(this.updateToken, 18000);
 		
 	//OAuth Token End
 	
