@@ -115,7 +115,6 @@ function AppViewModel() {
 		if(data.rtTime != null){
 			tramTime= data.rtTime;
 		}else{
-			console.log(data.time);
 			tramTime = data.time;
 		}
 			
