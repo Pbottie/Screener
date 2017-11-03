@@ -96,10 +96,13 @@ function AppViewModel() {
 		
 	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid;
 	
-		
+	console.log(token);
+	console.log("This: " + this.token);	
 	
 	//Olivedal
 	$.ajaxSetup({
+		
+		
 		headers : {
 			'Authorization' : 'Bearer '+ token,
 		}
