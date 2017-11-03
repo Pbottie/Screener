@@ -96,9 +96,6 @@ function AppViewModel() {
 		
 	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid;
 	
-	console.log(token);
-	console.log("This: " + this.token);	
-	
 	//Olivedal
 	$.ajaxSetup({
 		
@@ -111,7 +108,7 @@ function AppViewModel() {
 		
 	$.getJSON( tripQuestion,function(result) {
 
-		
+		console.log(result);
 		self.buses.removeAll();
        		$.each(result.DepartureBoard.Departure, function(i, data) {
 	
