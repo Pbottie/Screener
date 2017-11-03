@@ -76,10 +76,23 @@ function AppViewModel() {
 	console.log(year + "-" + month + "-" + day);
 	console.log(hours + ":" + minutes);
 	
+	this.updateToken = function()
+	{
+		
+	//Olivedal
+	$.getJSON("http://localhost/Screener/key.php" ,function(result) {
+
+		console.log(result.access_token);
+	this.token = result.access_token;
+			
+		});
 	
 	
+  	 });// END Olivedal
 	
 	
+	setInterval(this.updateToken, 1800000);
+		
 	//OAuth Token End
 	
 	
