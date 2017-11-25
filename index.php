@@ -281,7 +281,7 @@ function AppViewModel() {
 	
 	//GET Weather
 	var weatherParams = {
-    'q':'Gothenburg,Sweden',
+    'q':'Goeteborg,Sweden',
     'units':'metric','APPID':'74c81ec9b5ecd02d92f244cf23235856',
     };
 	
