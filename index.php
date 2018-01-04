@@ -315,7 +315,7 @@ function AppViewModel() {
 	};
 
 	this.updateCurrentWeather();
-	setInterval(this.updateCurrentWeather, 60000);
+	setInterval(this.updateCurrentWeather, 600000);
 	//END of Weather
 	
 	//SELFUPDATER
