@@ -308,14 +308,14 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-		$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
+		$.getJSON('https://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
 			self.weatherData(data);
 		});
 
 	};
 
 	this.updateCurrentWeather();
-	setInterval(this.updateCurrentWeather, 1020000);
+	setInterval(this.updateCurrentWeather, 10200); //1020000
 	//END of Weather
 	
 	//SELFUPDATER
