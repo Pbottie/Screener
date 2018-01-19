@@ -309,6 +309,7 @@ function AppViewModel() {
 	this.updateCurrentWeather = function()
 	{
 		$.ajaxSetup({
+			Accept: "application/json, text/javascript, */*; q=0.01"
 			type: "GET"
 		});
 		
