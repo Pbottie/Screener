@@ -309,8 +309,7 @@ function AppViewModel() {
 	this.updateCurrentWeather = function()
 	{
 		$.ajaxSetup({
-		headers : {
-		}
+			type: "GET";
 		});
 		
 		$.getJSON('https://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
