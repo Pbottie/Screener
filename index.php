@@ -312,7 +312,7 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-		$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Goeteborg,Sweden&units=metric&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
+		$.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Goeteborg,Sweden&units=metric&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
 			self.weatherData(data);
 		});
 
