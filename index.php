@@ -97,11 +97,11 @@ function AppViewModel() {
 	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid + '&format=json';
 	
 	//Olivedal
-//	$.ajaxSetup({
-//		headers : {
-//			'Authorization' : 'Bearer '+ token,
-//		}
-//	});		
+ 	$.ajaxSetup({
+		headers : {
+			'Authorization' : 'Bearer '+ token,
+		}
+	});		
 		
 		
 	$.getJSON( tripQuestion,function(result) {
@@ -281,8 +281,10 @@ function AppViewModel() {
 	
 	//GET Weather
 	var weatherParams = {
-    'q':'Goeteborg,Sweden',
-    'units':'metric','APPID':'74c81ec9b5ecd02d92f244cf23235856',
+    	'q':'Goeteborg,Sweden',
+    	'units':'metric',
+	'APPID':'74c81ec9b5ecd02d92f244cf23235856',
+
     };
 	
 	var iconTable = {
@@ -308,11 +310,7 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-	$.ajax({
-		contentType: "text/plain",
-         	type: "GET"
-        });
-		$.getJSON('https://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
+		$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
 			self.weatherData(data);
 		});
 
