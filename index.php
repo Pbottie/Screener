@@ -280,12 +280,7 @@ function AppViewModel() {
 	setInterval(this.updateClock,999);
 	
 	//GET Weather
-	var weatherParams = {
-    	'q':'Goeteborg,Sweden',
-    	'units':'metric',
-	'APPID':'74c81ec9b5ecd02d92f244cf23235856',
-
-    };
+	
 	
 	var iconTable = {
 			'01d':'wi-day-sunny',
@@ -307,10 +302,17 @@ function AppViewModel() {
 			'13n':'wi-night-snow',
 			'50n':'wi-night-alt-cloudy-windy'
 		};
+	
+	var weatherParams = {
+    	'q':'Goeteborg,Sweden',
+    	'units':'metric',
+	'APPID':'74c81ec9b5ecd02d92f244cf23235856',
+
+    	};
 		
 	this.updateCurrentWeather = function()
 	{
-		$.getJSON('http://api.openweathermap.org/data/2.5/weather', weatherParams, function(data){
+		$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Goeteborg,Sweden&units=metric&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
 			self.weatherData(data);
 		});
 
