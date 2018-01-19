@@ -97,11 +97,11 @@ function AppViewModel() {
 	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid + '&format=json';
 	
 	//Olivedal
-	$.ajaxSetup({
-		headers : {
-			'Authorization' : 'Bearer '+ token,
-		}
-	});		
+//	$.ajaxSetup({
+//		headers : {
+//			'Authorization' : 'Bearer '+ token,
+//		}
+//	});		
 		
 		
 	$.getJSON( tripQuestion,function(result) {
@@ -309,7 +309,9 @@ function AppViewModel() {
 	this.updateCurrentWeather = function()
 	{
 		$.ajaxSetup({
-			Accept: "application/json, text/javascript, */*; q=0.01"
+			headers : {
+			'Authorization' : 'Bearer '+ token,
+		}
 			type: "GET"
 		});
 		
