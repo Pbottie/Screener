@@ -286,6 +286,10 @@ function AppViewModel() {
 		var summaryRequest = new XMLHttpRequest();
 		summaryRequest.open('GET', url, true);
 		summaryRequest.onreadystatechange = function(){
+			
+			console.log("State is" + summaryRequest.readyState);
+			console.log("Status is" + summaryRequest.status);
+			
 			if(summaryRequest.readyState === 4 && summaryRequest.status === 200) {
 				console.log(summaryRequest.responseText);
 			}
