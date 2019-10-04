@@ -287,11 +287,13 @@ function AppViewModel() {
 	
 	this.getPihole = function(){
 		
-		$.getJSON( "http://192.168.1.166/admin/api.php?summary", function(result){
-			console.log(result)
-			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
-		}
-			 );
+		$.get("SSID", function(data){
+			console.log(data)
+			;}
+		     );
+		//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
+		
+		
 		
 	}
 	setInterval(this.getPihole,20000);
