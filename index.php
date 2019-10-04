@@ -280,17 +280,22 @@ function AppViewModel() {
 		var dates = now.format('LLLL').split(' ',4);
 		self.date(dates[0] + ' ' + dates[1] + ' ' + dates[2] + ' ' + dates[3]);
 		var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
-		self.times(times);
-		
+		self.times(times);		
+	};
+
+	setInterval(this.updateClock,999);
 	
-		$.getJSON( "http://pi.hole/admin/api.php?summary", function(result){
+	this.getPihole = function(){
+		
+	$.getJSON( "http://pi.hole/admin/api.php?summary", function(result){
 			console.log(result)
 			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
 		}
 			 );
-	};
-
-	setInterval(this.updateClock,999);
+	
+	}
+	setInterval(this.getPihole,20000);
+	
 	
 	//GET Weather
 	
