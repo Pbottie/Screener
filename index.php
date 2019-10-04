@@ -42,7 +42,9 @@
 	</div>
 	<div class="bottom right xxsmall" data-bind="text: SSID">
 	N/a
-	</div>
+	</div>	
+	
+	
 <script>
 
 function AppViewModel() {
@@ -50,9 +52,8 @@ function AppViewModel() {
 	
 	this.times  = ko.observable("");
 	this.date = ko.observable("");
-	this.weatherData = ko.observable(null);	
-  
-  this.piholeData = ko.observable("PiholeData");
+	this.weatherData = ko.observable(null);
+	this.piholeData = ko.observable("PiholeData");
     
 	this.sunTime = ko.observable(); 
 	
@@ -280,11 +281,27 @@ function AppViewModel() {
 		var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
 		self.times(times);
 		
-		$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
-			console.log(result)
-			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
+		
+		var url = "http://pi.hole/admin/api.php?summary";
+		var summaryRequest = new XMLHttpRequest();
+		summaryRequest.open('GET', url, true);
+		summaryRequest.onreadystatechange = function(){
+			if(summaryRequest.readyState === 4 && summaryRequest.status === 200) {
+				console.log(summaryRequest.responseText);
+			}
+		
 		}
-			 );
+		
+		
+		
+		
+		
+		
+		//$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
+		//	console.log(result)
+			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
+		//}
+		//	 );
 	};
 
 	setInterval(this.updateClock,999);
