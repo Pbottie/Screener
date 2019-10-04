@@ -18,7 +18,7 @@
 	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div></div>
 	
   <div class="bottom center-hor xxsmall" data-bind="text: piholeData">
-  PiholeData
+  
   </div>
   
 	<div class="top right">
@@ -52,7 +52,7 @@ function AppViewModel() {
 	this.date = ko.observable("");
 	this.weatherData = ko.observable(null);	
   
-  this.piholeData = ko.observable("");
+  this.piholeData = ko.observable("PiholeData");
     
 	this.sunTime = ko.observable(); 
 	
@@ -282,7 +282,7 @@ function AppViewModel() {
 	var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
 	self.times(times);
   
-  $.getJSON( "http://pi.hole/admin.api.php?summary?callback=?",function(result){
+  $.getJSON( "http://pi.hole/admin/api.php?summary?callback=?",function(result){
 	  console.log(result)
 	  //self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
   }
