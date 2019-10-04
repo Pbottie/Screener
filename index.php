@@ -284,8 +284,7 @@ function AppViewModel() {
   
   $.getJSON( "http://pi.hole/admin.api.php",function(result){
 	  self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
-  };
-	   
+  }
 	   );
 	
 	};
