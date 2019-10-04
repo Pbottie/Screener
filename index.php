@@ -287,7 +287,7 @@ function AppViewModel() {
 	
 	this.getPihole = function(){
 		
-		$.get("SSID", function(data){
+		$.get("PIHOLE", function(data){
 			console.log(data)
 			;}
 		     );
