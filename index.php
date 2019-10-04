@@ -289,6 +289,7 @@ function AppViewModel() {
 		
 		$.ajaxSetup({
 		headers : {
+			'Access-Control-Request-Headers' : '*'
 			
 		}
 	});
