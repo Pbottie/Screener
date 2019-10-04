@@ -282,29 +282,12 @@ function AppViewModel() {
 		var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
 		self.times(times);
 		
-		
-		var url = "http://pi.hole/admin/api.php?summary";
-		
-		var summaryRequest = new XMLHttpRequest();
-		summaryRequest.open('GET', url, true);
-		summaryRequest.onreadystatechange = function(){			
-			if(summaryRequest.readyState === 4 && summaryRequest.status === 200) {
-				console.log(summaryRequest.responseText);
-			}
-		
-		};
-		summaryRequest.send();
-		
-		
-		
-		
-		
-		
-		//$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
-		//	console.log(result)
+	
+		$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
+			console.log(result)
 			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
-		//}
-		//	 );
+		}
+			 );
 	};
 
 	setInterval(this.updateClock,999);
