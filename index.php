@@ -287,12 +287,6 @@ function AppViewModel() {
 	
 	this.getPihole = function(){
 		
-		$.ajaxSetup({
-		headers : {
-			'Access-Control-Request-Headers' : '*'
-			
-		}
-	});
 		$.getJSON( "http://pi.hole/admin/api.php?summary", function(result){
 			console.log(result)
 			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
