@@ -17,6 +17,10 @@
 
 	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div></div>
 	
+  <div class="bottom center-hor xxsmall" data-bind="text: piholeData">
+  PiholeData
+  </div>
+  
 	<div class="top right">
 		<div class="small dimmed">
 		<span class="wi wi-strong-wind xdimmed"></span>
@@ -26,7 +30,7 @@
 		</div>
 		<div>
 			<span data-bind="css: iconClass" class="icon dimmed wi"></span>
-			<span class="temp" data-bind="html: temps">
+      <span class="temp" data-bind="html: temps"></span>
 		</div>
 	</div>
 
@@ -47,6 +51,9 @@ function AppViewModel() {
 	this.times  = ko.observable("");
 	this.date = ko.observable("");
 	this.weatherData = ko.observable(null);	
+  
+  this.piholeData = ko.observable("");
+    
 	this.sunTime = ko.observable(); 
 	
 	self.buses = ko.observableArray();	
@@ -274,6 +281,11 @@ function AppViewModel() {
 	self.date(dates[0] + ' ' + dates[1] + ' ' + dates[2] + ' ' + dates[3]);
 	var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
 	self.times(times);
+  
+  $.getJSON( "http://pi.hole/admin.api.php",function(result) {
+  self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
+  
+  }
 	
 	};
 
@@ -345,4 +357,3 @@ ko.applyBindings(new AppViewModel());
 
 </body>
 </html>
-
