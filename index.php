@@ -274,20 +274,17 @@ function AppViewModel() {
 	});
  	
 	this.updateClock = function(){
-	
-	var now = moment();
-	var dates = now.format('LLLL').split(' ',4);
-	
-	self.date(dates[0] + ' ' + dates[1] + ' ' + dates[2] + ' ' + dates[3]);
-	var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
-	self.times(times);
-  
-  $.getJSON( "http://pi.hole/admin/api.php?summary",function(result){
-	  console.log(result)
-	  //self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
-  }
-	   );
-	
+		var now = moment();
+		var dates = now.format('LLLL').split(' ',4);
+		self.date(dates[0] + ' ' + dates[1] + ' ' + dates[2] + ' ' + dates[3]);
+		var times = now.format('HH') + ':' + now.format('mm') + '<span class="sec">'+now.format('ss')+'</span>';
+		self.times(times);
+		
+		$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
+			console.log(result)
+			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
+		}
+			 );
 	};
 
 	setInterval(this.updateClock,999);
