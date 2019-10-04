@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta charset="utf-8"/>
 <title>Magic Mirror</title>
 
 <link rel="stylesheet" href="css/main.css" type="text/css" />
@@ -283,18 +284,16 @@ function AppViewModel() {
 		
 		
 		var url = "http://pi.hole/admin/api.php?summary";
+		
 		var summaryRequest = new XMLHttpRequest();
 		summaryRequest.open('GET', url, true);
-		summaryRequest.onreadystatechange = function(){
-			
-			console.log("State is" + summaryRequest.readyState);
-			console.log("Status is" + summaryRequest.status);
-			
+		summaryRequest.onreadystatechange = function(){			
 			if(summaryRequest.readyState === 4 && summaryRequest.status === 200) {
 				console.log(summaryRequest.responseText);
 			}
 		
-		}
+		};
+		summaryRequest.send();
 		
 		
 		
