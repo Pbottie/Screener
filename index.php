@@ -283,7 +283,7 @@ function AppViewModel() {
 		self.times(times);
 		
 	
-		$.getJSON( "http://pi.hole/admin/api.php?summary?callback=?", function(result){
+		$.getJSON( "http://pi.hole/admin/api.php?summary", function(result){
 			console.log(result)
 			//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
 		}
