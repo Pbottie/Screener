@@ -289,13 +289,10 @@ function AppViewModel() {
 		
 		$.getJSON("PIHOLE.txt", function(data){				
 			
-			console.log("PiHole has blocked " + data.ads_blocked_today + " ads today!");
+			//console.log("PiHole has blocked " + data.ads_blocked_today + " ads today!");
+			self.piholeData.push("PiHole has blocked " + data.ads_blocked_today + " ads today!");
 		}
 		     );
-		//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
-		
-		
-		
 	}
 	setInterval(this.getPihole,20000);
 	
