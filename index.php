@@ -287,9 +287,8 @@ function AppViewModel() {
 	
 	this.getPihole = function(){
 		
-		$.get("PIHOLE", function(data){	
+		$.getJSON("PIHOLE", function(data){				
 			
-			var result = $.parseJSON(data);
 			console.log("PiHole has blocked " + result.ads_blocked_today + " ads today!");
 		}
 		     );
