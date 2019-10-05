@@ -290,7 +290,8 @@ function AppViewModel() {
 		$.getJSON("PIHOLE.txt", function(data){				
 			
 			//console.log("PiHole has blocked " + data.ads_blocked_today + " ads today!");
-			self.piholeData.push("PiHole has blocked " + data.ads_blocked_today + " ads today!");
+			
+			self.piholeData("PiHole has blocked " + data.ads_blocked_today + " ads today!");
 		}
 		     );
 	}
