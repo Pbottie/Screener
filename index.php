@@ -288,7 +288,7 @@ function AppViewModel() {
 	this.getPihole = function(){
 		
 		$.get("PIHOLE", function(data){
-			console.log(data)
+			console.log("PiHole has blocked " + data.ads_blocked_today + " ads today!")
 			;}
 		     );
 		//self.piholeData.push("PiHole has blocked " + result.ads_blocked_today + " ads today!");
