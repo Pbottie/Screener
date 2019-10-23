@@ -291,7 +291,7 @@ function AppViewModel() {
 			
 			//console.log("PiHole has blocked " + data.ads_blocked_today + " ads today!");
 			
-			self.piholeData("PiHole has blocked " + data.ads_blocked_today + " ads today!");
+			self.piholeData("PiHole has blocked " + data.ads_blocked_today + " ads in the last 24 hours!");
 		}
 		     );
 	}
