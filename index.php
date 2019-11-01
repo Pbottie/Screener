@@ -22,7 +22,7 @@
   
   </div>
 	
- <div class="center-hor center-ver"><img src="map.jpg" alt="Map" height="750"> </div> 
+ <div class="center-hor top img"><img src="map.jpg" alt="Map" height="750"> </div> 
 	
 	<div class="top right">
 		<div class="small dimmed">
