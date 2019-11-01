@@ -16,12 +16,12 @@
 </head>
 <body>
 
-	<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div></div>
+<div class="top left"><div class="small dimmed" data-bind="text: date"></div><div data-bind="html: times"></div></div>
 	
-  <div class="bottom center-hor xxsmall" data-bind="text: piholeData">
+ <div class="bottom center-hor xxsmall" data-bind="text: piholeData">
   
   </div>
-  
+ <div class="center-hor center-ver"><img src="/home/pi/map.jpg"> </div> 
 	<div class="top right">
 		<div class="small dimmed">
 		<span class="wi wi-strong-wind xdimmed"></span>
