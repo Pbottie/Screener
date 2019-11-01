@@ -12,6 +12,11 @@ body, html {
 	font-size: 75px;
 	 -webkit-font-smoothing: antialiased;
 }
+
+img{
+	margin: 100px
+}
+
 .wi {
 	line-height: 75px;
 
