@@ -13,10 +13,6 @@ body, html {
 	 -webkit-font-smoothing: antialiased;
 }
 
-img{
-	margin-top: 400px
-}
-
 .wi {
 	line-height: 75px;
 
@@ -48,6 +44,17 @@ img{
 	margin-top: -100px;
 	line-height: 100px;
 }
+
+.upper-third
+{
+	position: absolute;
+	top: 33.333%;
+	height: 200px;
+	margin-top: -100px;
+	line-height: 100px;	
+}
+
+
 
 .lower-third
 {
