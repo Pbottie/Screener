@@ -21,9 +21,7 @@
  <div class="bottom center-hor xxsmall" data-bind="text: piholeData">
   
   </div>
-	
- <div class="center-hor"><img src="map.jpg" alt="Map" height="750" style="margin-top: 400px;"> </div> 
-	
+		
 	<div class="top right">
 		<div class="small dimmed">
 		<span class="wi wi-strong-wind xdimmed"></span>
