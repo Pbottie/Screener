@@ -31,7 +31,8 @@
 		</div>
 		<div>
 			<span data-bind="css: iconClass" class="icon dimmed wi"></span>
-      <span class="temp" data-bind="html: temps"></span>
+			 <span class="temp" data-bind="html: temps"></span>
+			<span data-bind="html: feels" class="temp small"></span>
 		</div>
 	</div>
 
@@ -103,7 +104,7 @@ function AppViewModel() {
 	var idag = year + "-" + month + "-" + day;
 	var tid = hours + ":" + minutes;
 		
-	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard?id=.olive&date=' + idag + '&time=' + tid + '&format=json';
+	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.göteborg-central&date=' + idag + '&time=' + tid + '&format=json';
 	
 	//Olivedal
  	$.ajaxSetup({
@@ -117,14 +118,14 @@ function AppViewModel() {
 
 		
 		self.buses.removeAll();
-       		$.each(result.DepartureBoard.Departure, function(i, data) {
+       		$.each(result.TripList.Trip, function(i, data) {
 	
-		var tramTime;
+		var trainTime;
 		
-		if(data.rtTime != null){
-			tramTime= data.rtTime;
+		if(data.Leg.Origin.rtTime != null){
+			trainTime= data.Leg.Origin.rtTime;
 		}else{
-			tramTime = data.time;
+			trainTime = data.Leg.Origin.time;
 		}
 			
 		if(i==8)
@@ -134,18 +135,18 @@ function AppViewModel() {
 		//If black fgColor
 		if(data.fgColor == "#000000"){
 			self.buses.push({timeTable:  '<span style="background-color:' 
-	        	+ data.fgColor + '">' + '<font color="white">' 
-			+ data.name + " " 
-			+ tramTime + " "
-	        	+ data.direction
+	        	+ data.Leg.fgColor + '">' + '<font color="white">' 
+			+ data.Leg.name + " " 
+			+ trainTime + " "
+	        	+ data.Leg.direction
 	        	+ "</font>"});	
 		}
 		else{
 		        self.buses.push({timeTable:  '<span style="background-color:' 
-		        + data.fgColor + '">' + '<font color="black">' 
-		        + data.name + " " 
-		        + tramTime + " "
-		        + data.direction
+		        + data.Leg.fgColor + '">' + '<font color="black">' 
+		        + data.Leg.name + " " 
+		        + trainTime + " "
+		        + data.Leg.direction
 		        + "</font>"});
 			
 		}
@@ -158,72 +159,12 @@ function AppViewModel() {
 	
 	};
 	
-	this.update761 = function()
-	{
-		
-	var today = new Date();
-	var year = today.getFullYear();
-	var month = today.getMonth()+1;
-	var day = today.getDate();
-	var hours = today.getHours();
-	var minutes = today.getMinutes();
-	
-	var idag = year + "-" + month + "-" + day;
-	var tid = hours + ":" + minutes;
-		
-	var tripQuestionLinne =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.linne&destId=.solto&date=' + idag + '&time=' + tid + '&useTram=0&format=json';
-		
-	//Linne 761
-	$.ajaxSetup({
-		headers : {
-			'Authorization' : 'Bearer '+ token,
-		}
-	});
-		
-	$.getJSON( tripQuestionLinne,function(result) {
-		
-		
-		var buss = 0;
-		self.bus761.removeAll();
-       		$.each(result.TripList.Trip, function(j, data) {
-		
-		;
-		
-		if(data.Leg.sname == "761" && buss < 3){
-			buss += 1;
-			var busTime;
-			
-			if(data.Leg.Origin.rtTime != null){
-				busTime= data.Leg.Origin.rtTime;
-			}else{
-				busTime = data.Leg.Origin.time;
-			}
-			
-			self.bus761.push({timeTable:  '<span style="background-color:' 
-	        	+ data.Leg.fgColor + '">' + '<font color="black">' 
-			+ data.Leg.name + " " 
-			+ busTime
-	        	+ "</font>"});	
-		};
-			
-		});
-			
-        	}
-		      
-		      );//End Linne	
-		
-	};
-	
-	
-	
-	
-	
 	
 	
 	
 	setInterval(this.updateBus, 20000);
 	
-	setInterval(this.update761, 20000);
+	//setInterval(this.update761, 20000);
 	
 	this.windSpeed = ko.computed(function()
 	{		
@@ -253,6 +194,19 @@ function AppViewModel() {
 				return Math.round(self.weatherData().main.temp*10)/10 +'&deg;';
 			}
 		});
+
+
+
+
+	 this.feels = ko.computed(function()
+                {
+                        if(self.weatherData() == null){
+                                return 0 + '&deg;';
+                        }else{
+                                return '(' + Math.round(self.weatherData().main.feels_like*10)/10 +'&deg;' + ')';
+                        }
+                });
+
 	
 	this.suns = ko.computed(function()
 	{
@@ -323,7 +277,7 @@ function AppViewModel() {
 		};
 	
 	var weatherParams = {
-    	'q':'Goeteborg,Sweden',
+    	'q':'Surte,Sweden',
     	'units':'metric',
 	'APPID':'74c81ec9b5ecd02d92f244cf23235856',
 
@@ -331,7 +285,7 @@ function AppViewModel() {
 		
 	this.updateCurrentWeather = function()
 	{
-		$.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Goeteborg,Sweden&units=metric&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
+		$.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=Surte,Sweden&units=metric&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
 			self.weatherData(data);
 		});
 
