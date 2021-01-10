@@ -39,8 +39,8 @@
 	<div class="bottom left small" data-bind="foreach: buses">
 	<p data-bind="html: $data.timeTable">.</p>
 	</div>
-	<div class="bottom right small" data-bind="foreach: bus761">
-	<p data-bind="html: $data.timeTable">.</p>
+	<div class="bottom right small">
+	<p data-bind="text: tibber">.</p>
 	</div>
 	<div class="bottom right xxsmall" data-bind="text: SSID">
 	N/a
@@ -60,7 +60,7 @@ function AppViewModel() {
 	this.sunTime = ko.observable(); 
 	
 	self.buses = ko.observableArray();	
-	self.bus761 =ko.observableArray();
+	self.tibber =ko.observable("No price info");
 	
 	this.SSID = ko.observable("N/A");	
 	this.ssidUpdate = function()
@@ -72,6 +72,21 @@ function AppViewModel() {
 	}
 	setInterval(this.ssidUpdate, 60000);
 	
+	this.getTibber = function()
+	{
+		$.getJSON("tibberkey.php" ,function(result) {
+
+
+		var pris = result.data.viewer.homes[0].currentSubscription.priceInfo.current.total;
+
+		self.tibber("Elpris: " + (pris*100).toFixed(2) + " öre/kWh");
+		});
+	
+
+	}
+
+	setInterval(this.getTibber,1800000);
+
 	//OAuth Token Begin
 	
 	var token;
@@ -122,26 +137,20 @@ function AppViewModel() {
 	
 		var trainTime;
 		
+
+               if(i==8 || data.Leg.Origin == null )
+                {
+                        return false;
+                }
+
+
 		if(data.Leg.Origin.rtTime != null){
 			trainTime= data.Leg.Origin.rtTime;
 		}else{
 			trainTime = data.Leg.Origin.time;
 		}
-			
-		if(i==8)
-		{
-			return false;
-		}
-		//If black fgColor
-		if(data.fgColor == "#000000"){
-			self.buses.push({timeTable:  '<span style="background-color:' 
-	        	+ data.Leg.fgColor + '">' + '<font color="white">' 
-			+ data.Leg.name + " " 
-			+ trainTime + " "
-	        	+ data.Leg.direction
-	        	+ "</font>"});	
-		}
-		else{
+		
+		
 		        self.buses.push({timeTable:  '<span style="background-color:' 
 		        + data.Leg.fgColor + '">' + '<font color="black">' 
 		        + data.Leg.name + " " 
@@ -149,7 +158,7 @@ function AppViewModel() {
 		        + data.Leg.direction
 		        + "</font>"});
 			
-		}
+		
 			
 		});
 	
@@ -309,6 +318,8 @@ function AppViewModel() {
 		
 	};
 	setInterval(this.checkVersion, 5000);
+
+	this.getTibber();
 	
 }
 ko.applyBindings(new AppViewModel());
