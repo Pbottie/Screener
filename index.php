@@ -296,8 +296,13 @@ function AppViewModel() {
 	this.updateCurrentWeather = function()
 	{
 
+		 $.ajaxSetup({
+                headers : {
+                        'Authorization' : '',
+                }
+        });
 
-		$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Surte,Sweden&units=metric&callback=&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
+		$.getJSON("http://api.openweathermap.org/data/2.5/weather?q=Surte,Sweden&units=metric&callback=?&APPID=74c81ec9b5ecd02d92f244cf23235856", function(data){
 			self.weatherData(data);
 		});
 
