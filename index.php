@@ -119,8 +119,8 @@ function AppViewModel() {
 	var idag = year + "-" + month + "-" + day;
 	var tid = hours + ":" + minutes;
 		
-	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.göteborg-central&date=' + idag + '&time=' + tid + '&format=json';
-	
+	//var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.göteborg-central&date=' + idag + '&time=' + tid + '&format=json';
+	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.gamlestaden.station&date=' + idag + '&time=' + tid + '&format=json';
 	//Olivedal
  	$.ajaxSetup({
 		headers : {
