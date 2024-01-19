@@ -89,15 +89,20 @@ function AppViewModel() {
 	//OAuth Token Begin
 	
 	var token;
+	var expires_in;
 		
 	this.updateToken = function()
 	{
-		
-	$.getJSON("key.php" ,function(result) {
+	if( expires_in == null || expires_in <= 60)
+	{		
+		$.getJSON("key.php" ,function(result) {
 
-		token = result.access_token;
+			token = result.access_token;
+			expires_in = result.expires_in;
 		
 		});
+		
+	}	
 	};
 	setInterval(this.updateToken, 18000);
 		
@@ -109,17 +114,11 @@ function AppViewModel() {
 	{
 	
 	var today = new Date();
-	var year = today.getFullYear();
-	var month = today.getMonth()+1;
-	var day = today.getDate();
-	var hours = today.getHours();
-	var minutes = today.getMinutes();
 	
-	var idag = year + "-" + month + "-" + day;
-	var tid = hours + ":" + minutes;
+	var idag = today.toISOString();
 		
 	//var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.göteborg-central&date=' + idag + '&time=' + tid + '&format=json';
-	var tripQuestion =   'https://api.vasttrafik.se/bin/rest.exe/v2/trip?originId=.bohus&destId=.gamlestaden.station&date=' + idag + '&time=' + tid + '&format=json';
+	var tripQuestion =   'https://ext-api.vasttrafik.se/pr/v4/journeys?originGid=9021014016200000&destinationGid=9021014002672000'
 	//Olivedal
  	$.ajaxSetup({
 		headers : {
@@ -132,32 +131,23 @@ function AppViewModel() {
 
 		
 		self.buses.removeAll();
-       		$.each(result.TripList.Trip, function(i, data) {
+       		$.each(result.results, function(i, data) {
+				var trip = data.tripLegs[0];
+
+		if (!trip.isCancelled) {
+
+        trainTime = new Date(Date.parse(trip.estimatedDepartureTime));
+
+        buses.push({
+            timeTable: '<span style="background-color:'
+                + trip.serviceJourney.line.backgroundColor + '">' + '<font color="black">'
+                + trip.serviceJourney.line.name + " "
+                + trainTime.toLocaleTimeString() + " "
+                + trip.serviceJourney.direction
+                + "</font>"
+        });
+    }
 	
-		var trainTime;
-		
-
-               if(i==8 || data.Leg.Origin == null )
-                {
-                        return false;
-                }
-
-
-		if(data.Leg.Origin.rtTime != null){
-			trainTime= data.Leg.Origin.rtTime;
-		}else{
-			trainTime = data.Leg.Origin.time;
-		}
-		
-		
-		        self.buses.push({timeTable:  '<span style="background-color:' 
-		        + data.Leg.fgColor + '">' + '<font color="black">' 
-		        + data.Leg.name + " " 
-		        + trainTime + " "
-		        + data.Leg.direction
-		        + "</font>"});
-			
-		
 			
 		});
 	
