@@ -138,7 +138,7 @@ function AppViewModel() {
 
         trainTime = new Date(Date.parse(trip.estimatedDepartureTime));
 
-        buses.push({
+        self.buses.push({
             timeTable: '<span style="background-color:'
                 + trip.serviceJourney.line.backgroundColor + '">' + '<font color="black">'
                 + trip.serviceJourney.line.name + " "
