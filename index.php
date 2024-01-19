@@ -46,7 +46,6 @@
 	N/a
 	</div>	
 	
-	
 <script>
 
 function AppViewModel() {
