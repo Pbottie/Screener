@@ -140,7 +140,9 @@ function AppViewModel() {
 
         self.buses.push({
             timeTable: '<span style="background-color:'
-                + trip.serviceJourney.line.backgroundColor + '">' + '<font color="black">'
+                + trip.serviceJourney.line.backgroundColor + '">'
+		+ '<font color='
+		+ trip.serviceJourney.line.foregroundColor +  '>'
                 + trip.serviceJourney.line.name + " "
                 + trainTime.toLocaleTimeString() + " "
                 + trip.serviceJourney.direction
