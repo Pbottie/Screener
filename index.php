@@ -93,18 +93,17 @@ function AppViewModel() {
 		
 	this.updateToken = function()
 	{
-	if( expires_in == null || expires_in <= 60)
-	{		
+		
 		$.getJSON("key.php" ,function(result) {
 
 			token = result.access_token;
 			expires_in = result.expires_in;
 		
-		});
-		
-	}	
+		});	
+
 	};
-	setInterval(this.updateToken, 18000);
+	this.updateToken();
+	setInterval(this.updateToken, 86401000);
 		
 	//OAuth Token End
 	
